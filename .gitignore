@@ -9,3 +9,4 @@ aliases.zsh
 completions/
 secrets.zsh
 
+*.swp
