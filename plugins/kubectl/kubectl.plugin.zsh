@@ -10,6 +10,18 @@ if (( $+commands[kubectl] )); then
     unset __KUBECTL_COMPLETION_FILE
 fi
 
+function get_k8s_secret()
+{
+    secret=$1
+    namespace=$2
+    if [ -z "$namespace" ]
+    then
+        kubectl get secret $secret -o json | jq .data | jq -r 'to_entries[] | "\(.key): \(.value | @base64d)\n"'
+    else
+        kubectl get secret $secret -n $namespace -o json | jq .data | jq -r 'to_entries[] | "\(.key): \(.value | @base64d)\n"'
+    fi
+}
+
 # This command is used a LOT both below and in daily life
 alias k=kubectl
 
@@ -37,25 +49,33 @@ alias kdelf='kubectl delete -f'
 
 # Pod management.
 alias kgp='kubectl get pods'
+alias kgpa='kubectl get pods --all-namespaces'
 alias kgpw='kgp --watch'
+alias kgpaw='kgpa --watch'
 alias kgpwide='kgp -o wide'
+alias kgpawide='kgpa -o wide'
 alias kep='kubectl edit pods'
 alias kdp='kubectl describe pods'
 alias kdelp='kubectl delete pods'
 
 # get pod by label: kgpl "app=myapp" -n myns
 alias kgpl='kgp -l'
+alias kgpal='kgpa -l'
 
 # Service management.
 alias kgs='kubectl get svc'
+alias kgsa='kubectl get svc --all-namespaces'
 alias kgsw='kgs --watch'
+alias kgsaw='kgsa --watch'
 alias kgswide='kgs -o wide'
+alias kgsawide='kgsa -o wide'
 alias kes='kubectl edit svc'
 alias kds='kubectl describe svc'
 alias kdels='kubectl delete svc'
 
 # Ingress management
 alias kgi='kubectl get ingress'
+alias kgia='kubectl get ingress --all-namespaces'
 alias kei='kubectl edit ingress'
 alias kdi='kubectl describe ingress'
 alias kdeli='kubectl delete ingress'
@@ -69,19 +89,25 @@ alias kcn='kubectl config set-context $(kubectl config current-context) --namesp
 
 # ConfigMap management
 alias kgcm='kubectl get configmaps'
+alias kgcma='kubectl get configmaps --all-namespaces'
 alias kecm='kubectl edit configmap'
 alias kdcm='kubectl describe configmap'
 alias kdelcm='kubectl delete configmap'
 
 # Secret management
 alias kgsec='kubectl get secret'
+alias kgsecd='get_k8s_secret'
+alias kgseca='kubectl get secret --all-namespaces'
 alias kdsec='kubectl describe secret'
 alias kdelsec='kubectl delete secret'
 
 # Deployment management.
 alias kgd='kubectl get deployment'
+alias kgda='kubectl get deployment --all-namespaces'
 alias kgdw='kgd --watch'
+alias kgdaw='kgda --watch'
 alias kgdwide='kgd -o wide'
+alias kgdawide='kgda -o wide'
 alias ked='kubectl edit deployment'
 alias kdd='kubectl describe deployment'
 alias kdeld='kubectl delete deployment'
@@ -93,13 +119,17 @@ kres(){
 
 # Rollout management.
 alias kgrs='kubectl get rs'
+alias kgrsa='kubectl get rs --all-namespaces'
 alias krh='kubectl rollout history'
 alias kru='kubectl rollout undo'
 
 # Statefulset management.
 alias kgss='kubectl get statefulset'
+alias kgssa='kubectl get statfulset --all-namespaces'
 alias kgssw='kgss --watch'
+alias kgssaw='kgssa --watch'
 alias kgsswide='kgss -o wide'
+alias kgssawide='kgssa -o wide'
 alias kess='kubectl edit statefulset'
 alias kdss='kubectl describe statefulset'
 alias kdelss='kubectl delete statefulset'
@@ -122,14 +152,32 @@ alias kcp='kubectl cp'
 
 # Node Management
 alias kgno='kubectl get nodes'
+alias kgnowide='kubectl get nodes -o wide'
+alias kgnow='kubectl get nodes --watch'
 alias keno='kubectl edit node'
 alias kdno='kubectl describe node'
 alias kdelno='kubectl delete node'
 
 # PVC management.
 alias kgpvc='kubectl get pvc'
+alias kgpvca='kubectl get pvc --all-namespaces'
 alias kgpvcw='kgpvc --watch'
+alias kgpvcaw='kgpvca --watch'
 alias kepvc='kubectl edit pvc'
 alias kdpvc='kubectl describe pvc'
 alias kdelpvc='kubectl delete pvc'
 
+# PV management
+alias kgpv='kubectl get pv'
+alias kgpvw='kgpv --watch'
+alias kepv='kubectl edit pv'
+alias kdpv='kubectl describe pv'
+alias kdelpv='kubectl delete pv'
+
+# StorageClass management
+alias kgsc='kubectl get sc'
+alias kgscw='kubectl get sc --watch'
+alias kgscwide='kubectl get sc -o wide'
+alias kdsc='kubectl describe sc'
+alias kesc='kubectl edit sc'
+alias kdelsc='kubectl delete sc'

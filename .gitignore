@@ -4,3 +4,8 @@ custom/
 # temp files directories
 cache/
 log/
+
+aliases.zsh
+completions/
+secrets.zsh
+
