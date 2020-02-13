@@ -10,3 +10,4 @@ completions/
 secrets.zsh
 
 *.swp
+.DS_Store
