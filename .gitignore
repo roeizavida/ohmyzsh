@@ -8,6 +8,7 @@ log/
 aliases.zsh
 completions/
 secrets.zsh
+gnu_aliases.zsh
 
 *.swp
 .DS_Store
