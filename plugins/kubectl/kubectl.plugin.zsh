@@ -62,6 +62,9 @@ alias kdelp='kubectl delete pods'
 alias kgpl='kgp -l'
 alias kgpal='kgpa -l'
 
+# get pod by namespace: kgpn kube-system"
+alias kgpn='kgp -n'
+
 # Service management.
 alias kgs='kubectl get svc'
 alias kgsa='kubectl get svc --all-namespaces'
