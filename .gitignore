@@ -6,11 +6,11 @@ cache/
 log/
 
 # My ZSH config
-aliases.zsh
-completions/
+*aliases.zsh
 secrets.zsh
 gnu_aliases.zsh
 functions.zsh
+completions/
 
 *.swp
 .DS_Store
