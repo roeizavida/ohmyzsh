@@ -46,6 +46,8 @@ alias kcgc='kubectl config get-contexts'
 # General aliases
 alias kdel='kubectl delete'
 alias kdelf='kubectl delete -f'
+alias kg='kubectl get'
+alias kd='kubectl describe'
 
 # Pod management.
 alias kgp='kubectl get pods'
@@ -190,3 +192,11 @@ alias kgscwide='kubectl get sc -o wide'
 alias kdsc='kubectl describe sc'
 alias kesc='kubectl edit sc'
 alias kdelsc='kubectl delete sc'
+
+# Dapr Components
+alias kgc='kubectl get component'
+alias kgcw='kgc --watch'
+alias kgcwide='kgc -o wide'
+alias kdc='kubectl describe component'
+alias kec='kubectl edit component'
+alias kdelc='kubectl delete component'
