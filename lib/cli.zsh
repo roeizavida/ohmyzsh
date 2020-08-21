@@ -201,6 +201,7 @@ function _omz::pr::test {
 }
 
 function _omz::update {
+    # Run update script
     env ZSH="$ZSH" sh "$ZSH/tools/upgrade.sh"
     # Update last updated file
     zmodload zsh/datetime
