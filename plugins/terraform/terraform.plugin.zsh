@@ -9,3 +9,15 @@ function tf_prompt_info() {
 }
 
 alias tf='terraform'
+alias tfinit='terraform init'
+alias tfv='terraform validate'
+alias tfa='terraform apply'
+alias tfp='terraform plan'
+alias tfd='terraform destroy'
+alias tfi='terraform import'
+alias tfc='terraform console'
+alias tftaint='terraform taint'
+alias tfuntaint='terraform untaint'
+alias tffmt='terraform fmt -recursive -diff'
+alias tfo='terraform output'
+alias tfstate='terraform state'
