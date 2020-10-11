@@ -178,25 +178,19 @@ alias kepvc='kubectl edit pvc'
 alias kdpvc='kubectl describe pvc'
 alias kdelpvc='kubectl delete pvc'
 
-# PV management
-alias kgpv='kubectl get pv'
-alias kgpvw='kgpv --watch'
-alias kepv='kubectl edit pv'
-alias kdpv='kubectl describe pv'
-alias kdelpv='kubectl delete pv'
+# Colored JSON output
+kj() {
+  kubectl "$@" -o json | jq
+}
+compdef kj=kubectl
 
-# StorageClass management
-alias kgsc='kubectl get sc'
-alias kgscw='kubectl get sc --watch'
-alias kgscwide='kubectl get sc -o wide'
-alias kdsc='kubectl describe sc'
-alias kesc='kubectl edit sc'
-alias kdelsc='kubectl delete sc'
+kjx() {
+  kubectl "$@" -o json | fx
+}
+compdef kjx=kubectl
 
-# Dapr Components
-alias kgc='kubectl get component'
-alias kgcw='kgc --watch'
-alias kgcwide='kgc -o wide'
-alias kdc='kubectl describe component'
-alias kec='kubectl edit component'
-alias kdelc='kubectl delete component'
+# Colored YAML output
+ky() {
+  kubectl "$@" -o yaml | yh
+}
+compdef ky=kubectl
