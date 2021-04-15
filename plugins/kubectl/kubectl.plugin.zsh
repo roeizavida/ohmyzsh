@@ -169,6 +169,16 @@ alias keno='kubectl edit node'
 alias kdno='kubectl describe node'
 alias kdelno='kubectl delete node'
 
+# PV management.
+alias kgpv='kubectl get pv'
+alias kgpva='kubectl get pv --all-namespaces'
+alias kgpvw='kgpv --watch'
+alias kgpvaw='kgpva --watch'
+alias kepv='kubectl edit pv'
+alias kdpv='kubectl describe pv'
+alias kdelpv='kubectl delete pv'
+
+
 # PVC management.
 alias kgpvc='kubectl get pvc'
 alias kgpvca='kubectl get pvc --all-namespaces'
