@@ -60,6 +60,7 @@ alias kep='kubectl edit pods'
 alias kdp='kubectl describe pods'
 alias kdelp='kubectl delete pods'
 alias kgpall='kubectl get pods --all-namespaces -o wide'
+alias kgpi='kubectl get pods --output=custom-columns="NAME:.metadata.name,IMAGE:.spec.containers[*].image"'
 
 # get pod by label: kgpl "app=myapp" -n myns
 alias kgpl='kgp -l'
@@ -119,6 +120,7 @@ alias kdd='kubectl describe deployment'
 alias kdeld='kubectl delete deployment'
 alias ksd='kubectl scale deployment'
 alias krsd='kubectl rollout status deployment'
+alias kgdi='kubectl get deploy --output=custom-columns="NAME:.metadata.name,IMAGE:.spec.template.spec.containers[*].image"'
 kres(){
     kubectl set env $@ REFRESHED_AT=$(date +%Y%m%d%H%M%S)
 }
@@ -188,6 +190,10 @@ alias kgpvcaw='kgpvca --watch'
 alias kepvc='kubectl edit pvc'
 alias kdpvc='kubectl describe pvc'
 alias kdelpvc='kubectl delete pvc'
+
+# PV management.
+alias kgpv='kubectl get pv'
+alias kgpva='kubectl get pv -A'
 
 # Service account management.
 alias kdsa="kubectl describe sa"
