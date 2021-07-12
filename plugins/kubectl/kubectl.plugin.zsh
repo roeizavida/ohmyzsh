@@ -22,6 +22,21 @@ function get_k8s_secret()
     fi
 }
 
+function k8s_yaml_to_json()
+{
+    kubectl apply --dry-run=client -o json -f $1 | \
+        jq 'del(
+            .items[].status,
+            .items[].metadata.annotations."deployment.kubernetes.io/revision",
+            .items[].metadata.annotations."kubectl.kubernetes.io/last-applied-configuration",
+            .items[].metadata.creationTimestamp,
+            .items[].metadata.resourceVersion,
+            .items[].metadata.selfLink,
+            .items[].metadata.uid,
+            .items[].metadata.generation,
+            .items[].spec.template.metadata.creationTimestamp)'
+}
+
 # This command is used a LOT both below and in daily life
 alias k=kubectl
 
