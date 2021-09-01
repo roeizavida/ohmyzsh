@@ -10,7 +10,11 @@ log/
 secrets.zsh
 gnu_aliases.zsh
 functions.zsh
-completions/
+completions/*
+
+# Exclude completions
+!completions/_kubectx
+!completions/_kubens
 
 *.swp
 .DS_Store
