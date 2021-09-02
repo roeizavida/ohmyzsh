@@ -230,6 +230,9 @@ alias kecj='kubectl edit cronjob'
 alias kdcj='kubectl describe cronjob'
 alias kdelcj='kubectl delete cronjob'
 
+# Delete all resources (run as "kdela --context <CONTEXT> -n <NAMESPACE> -l <KEY=VALUE>")
+alias kdela='kubectl delete configmap,secret,deployment,statefulset,daemonset,service,ingress,job,cronjob,persistentvolumeclaim,pod,replicaset'
+
 # Only run if the user actually has kubectl installed
 if (( ${+_comps[kubectl]} )); then
   kj() { kubectl "$@" -o json | jq; }
