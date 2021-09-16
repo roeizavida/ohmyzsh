@@ -8,6 +8,10 @@ function tf_prompt_info() {
     fi
 }
 
+function tf_targets () {
+    cat $1 | grep 'resource ".*"\|data ".*"\|module ".*"' | sed -e 's/ "/./g' -e 's/"././g' -e 's/.{//g' -e 's/^resource.//g' -e 's/^/-target /g' -e 's/$/ \\/g'
+}
+
 alias tf='terraform'
 alias tfinit='terraform init'
 alias tfinitb='terraform init -backend-config'
