@@ -1,17 +1,10 @@
-# custom files
-custom/
-
 # temp files directories
 cache/
 log/
 
 # My ZSH config
 roei/
-completions/*
 
-# Exclude completions
-!completions/_kubectx
-!completions/_kubens
-
+# Temporary files
 *.swp
 .DS_Store
