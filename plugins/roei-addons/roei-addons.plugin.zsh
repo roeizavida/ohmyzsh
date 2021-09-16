@@ -25,3 +25,11 @@ fi
 
 # Load functions
 source "${plugin_dir}/functions.zsh"
+
+###############################################
+# Completion
+###############################################
+# Load zsh completion
+autoload -U +X compinit && compinit
+autoload -U +X bashcompinit && bashcompinit
+###############################################
