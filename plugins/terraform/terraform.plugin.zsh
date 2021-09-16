@@ -1,3 +1,6 @@
+###############################################
+# Functions
+###############################################
 function tf_prompt_info() {
     # dont show 'default' workspace in home dir
     [[ "$PWD" == ~ ]] && return
@@ -12,6 +15,15 @@ function tf_targets () {
     cat $1 | grep 'resource ".*"\|data ".*"\|module ".*"' | sed -e 's/ "/./g' -e 's/"././g' -e 's/.{//g' -e 's/^resource.//g' -e 's/^/-target /g' -e 's/$/ \\/g'
 }
 
+###############################################
+# Terraform Cache
+###############################################
+export TF_PLUGIN_CACHE_DIR=~/.terraform_cache
+mkdir -p $TF_PLUGIN_CACHE_DIR
+
+###############################################
+# Aliases
+###############################################
 alias tf='terraform'
 alias tfinit='terraform init'
 alias tfinitb='terraform init -backend-config'
