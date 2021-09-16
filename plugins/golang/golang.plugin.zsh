@@ -256,6 +256,14 @@ __go_tool_complete() {
 
 compdef __go_tool_complete go
 
+###############################################
+# Go Path
+###############################################
+export GOPATH=~/go
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:$GOBIN:/usr/local/go/bin
+###############################################
+
 # aliases: go<~>
 alias gob='go build'
 alias goc='go clean'
