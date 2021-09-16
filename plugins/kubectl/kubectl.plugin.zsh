@@ -42,6 +42,10 @@ function k8s_yaml_to_json()
 # This command is used a LOT both below and in daily life
 alias k=kubectl
 
+# Kubectx
+alias ktx=kubectx
+alias kns=kubens
+
 # Execute a kubectl command against all namespaces
 alias kca='_kca(){ kubectl "$@" --all-namespaces;  unset -f _kca; }; _kca'
 
