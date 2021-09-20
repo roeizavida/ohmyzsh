@@ -1,9 +1,16 @@
+###############################################
+# Variables
+###############################################
 # Get the plugin dir
 plugin_dir=$(dirname $0)
 
 # Get the OS
 os_name=$(uname)
+###############################################
 
+###############################################
+# Aliases
+###############################################
 # Load aliases
 source "${plugin_dir}/aliases.zsh"
 
@@ -25,6 +32,7 @@ fi
 
 # Load functions
 source "${plugin_dir}/functions.zsh"
+###############################################
 
 ###############################################
 # Completion
@@ -32,4 +40,11 @@ source "${plugin_dir}/functions.zsh"
 # Load zsh completion
 autoload -U +X compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
+###############################################
+
+###############################################
+# ZSH
+###############################################
+# Disable ZSH update prompt
+DISABLE_UPDATE_PROMPT=true
 ###############################################
