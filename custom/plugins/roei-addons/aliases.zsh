@@ -52,4 +52,5 @@ alias wgetq='wget -q'
 # Python3 Venv
 alias vpy='./.venv/bin/python3'
 alias vpip='./.venv/bin/pip3'
+alias vpycreate='python3 -m venv .venv'
 alias vpyactivate='source ./.venv/bin/activate'
