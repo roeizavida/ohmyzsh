@@ -97,6 +97,13 @@ alias gcas='git commit -a -s'
 alias gcasm='git commit -a -s -m'
 alias gcb='git checkout -b'
 alias gcf='git config --list'
+
+function gccd() {
+  command git clone --recurse-submodules "$@"
+  [[ -d "$_" ]] && cd "$_" || cd "${${_:h}%.git}"
+}
+compdef _git gccd=git-clone
+
 alias gcl='git clone --recurse-submodules'
 alias gclean='git clean -id'
 alias gpristine='git reset --hard && git clean -dffx'
@@ -201,8 +208,8 @@ alias gignore='git update-index --assume-unchanged'
 alias gignored='git ls-files -v | grep "^[[:lower:]]"'
 alias git-svn-dcommit-push='git svn dcommit && git push github $(git_main_branch):svntrunk'
 
-alias gk='\gitk --all --branches'
-alias gke='\gitk --all $(git log -g --pretty=%h)'
+alias gk='\gitk --all --branches &!'
+alias gke='\gitk --all $(git log -g --pretty=%h) &!'
 
 alias gl='git pull'
 alias glne='git pull --no-edit'

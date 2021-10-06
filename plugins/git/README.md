@@ -47,6 +47,7 @@ plugins=(... git)
 | gcb                  | git checkout -b                                                                                                                  |
 | gcf                  | git config --list                                                                                                                |
 | gcl                  | git clone --recurse-submodules                                                                                                   |
+| gccd                 | git clone --recurse-submodules "$@" && cd "$(basename $_ .git)"                                                                  |
 | gclean               | git clean -id                                                                                                                    |
 | gpristine            | git reset --hard && git clean -dffx                                                                                              |
 | gcm                  | git checkout $(git_main_branch)                                                                                                  |
@@ -90,8 +91,8 @@ plugins=(... git)
 | gignore              | git update-index --assume-unchanged                                                                                              |
 | gignored             | git ls-files -v \| grep "^[[:lower:]]"                                                                                           |
 | git-svn-dcommit-push | git svn dcommit && git push github $(git_main_branch):svntrunk                                                                   |
-| gk                   | gitk --all --branches                                                                                                            |
-| gke                  | gitk --all $(git log -g --pretty=%h)                                                                                             |
+| gk                   | gitk --all --branches &!                                                                                                          |
+| gke                  | gitk --all $(git log -g --pretty=%h) &!                                                                                           |
 | gl                   | git pull                                                                                                                         |
 | glg                  | git log --stat                                                                                                                   |
 | glgp                 | git log --stat -p                                                                                                                |
