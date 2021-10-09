@@ -154,7 +154,7 @@ alias kru='kubectl rollout undo'
 
 # Statefulset management.
 alias kgss='kubectl get statefulset'
-alias kgssa='kubectl get statfulset --all-namespaces'
+alias kgssa='kubectl get statefulset --all-namespaces'
 alias kgssw='kgss --watch'
 alias kgssaw='kgssa --watch'
 alias kgsswide='kgss -o wide'
