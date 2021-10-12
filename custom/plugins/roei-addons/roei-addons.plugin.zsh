@@ -15,8 +15,7 @@ os_name=$(uname)
 DISABLE_UPDATE_PROMPT=true
 
 # History size
-HISTSIZE=999999999
-SAVEHIST=$HISTSIZE
+SAVEHIST=999999999
 ###############################################
 
 ###############################################
