@@ -13,6 +13,10 @@ os_name=$(uname)
 ###############################################
 # Disable ZSH update prompt
 DISABLE_UPDATE_PROMPT=true
+
+# History size
+HISTSIZE=999999999
+SAVEHIST=$HISTSIZE
 ###############################################
 
 ###############################################
