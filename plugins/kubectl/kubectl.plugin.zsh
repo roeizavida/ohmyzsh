@@ -81,7 +81,7 @@ alias kep='kubectl edit pods'
 alias kdp='kubectl describe pods'
 alias kdelp='kubectl delete pods'
 alias kgpall='kubectl get pods --all-namespaces -o wide'
-alias kgpi='kubectl get pods --output=custom-columns="NAME:.metadata.name,IMAGE:.spec.containers[*].image"'
+alias kgpi='kubectl --kubeconfig skaffold/controller-local-kubeconfig.yml get pods --output=custom-columns="NAME:.metadata.name,STATUS:.status.phase,AGE:.status.startTime,IMAGE:.spec.containers[*].image"'
 
 # get pod by label: kgpl "app=myapp" -n myns
 alias kgpl='kgp -l'
