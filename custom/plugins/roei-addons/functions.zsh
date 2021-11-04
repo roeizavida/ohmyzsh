@@ -46,7 +46,7 @@ function docker_env () {
 function gitconfig () {
     pwd=$(pwd)
     gitconfigparams=$(realpath .gitconfigparams)
-    for repo in $(find . -type f -wholename '*/.git/config' | awk -F '/.git/' '{print $1}')
+    for repo in $(find . -type f -wholename '*/.git/config' | grep -v -E '/.terraform/|/temp/' | awk -F '/.git/' '{print $1}')
     do
         cd ${pwd}/${repo}
         source ${gitconfigparams}
