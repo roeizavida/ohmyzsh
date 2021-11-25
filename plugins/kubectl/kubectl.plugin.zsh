@@ -151,6 +151,8 @@ alias kgrs='kubectl get rs'
 alias kgrsa='kubectl get rs --all-namespaces'
 alias krh='kubectl rollout history'
 alias kru='kubectl rollout undo'
+alias krrd='kubectl rollout restart deployment'
+alias krrss='kubectl rollout restart statefulset'
 
 # Statefulset management.
 alias kgss='kubectl get statefulset'
