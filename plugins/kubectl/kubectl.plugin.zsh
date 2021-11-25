@@ -166,6 +166,7 @@ alias kdss='kubectl describe statefulset'
 alias kdelss='kubectl delete statefulset'
 alias ksss='kubectl scale statefulset'
 alias krsss='kubectl rollout status statefulset'
+alias kgssi='kubectl get statefulset --output=custom-columns="NAME:.metadata.name,IMAGE:.spec.template.spec.containers[*].image"'
 
 # Port forwarding
 alias kpf="kubectl port-forward"
