@@ -243,7 +243,7 @@ alias kdelcj='kdel cronjob'
 
 # Delete all resources (run as "kdela --context <CONTEXT> -n <NAMESPACE> -l <KEY=VALUE>")
 alias kdela='kdel configmap,secret,deployment,statefulset,daemonset,service,ingress,job,cronjob,pod,replicaset'
-alias kdelpurge='kdel configmap,secret,deployment,statefulset,daemonset,service,ingress,job,cronjob,pod,replicaset,persistentvolumeclaim'
+alias kdelapurge='kdel configmap,secret,deployment,statefulset,daemonset,service,ingress,job,cronjob,pod,replicaset,persistentvolumeclaim'
 
 ###############################################
 # KJ, KJX and KY syntax colors
