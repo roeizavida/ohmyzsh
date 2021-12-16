@@ -5,7 +5,8 @@
 alias zshedit='vim ~/.zshrc'
 
 # Bat
-alias b='bat --theme TwoDark'
+alias b='bat --style="plain" --paging=never --theme "Sublime Snazzy" --color=always'
+alias bp='bat --theme "Sublime Snazzy" --color=always'
 alias byml='b -l yaml'
 alias bjson='b -l json'
 
