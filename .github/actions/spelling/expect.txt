@@ -3456,6 +3456,7 @@ sheerun
 shellcheck
 shellinit
 shellperson
+SHELLPROXY
 shitload
 SHLVL
 shm
@@ -3687,7 +3688,6 @@ Subsubcommands
 Subsubsubcommands
 sudo
 sudoedit
-SUFIX
 suitenames
 sunaku
 sunion
