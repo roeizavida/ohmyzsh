@@ -53,3 +53,5 @@ function gitconfig () {
     done
     cd ${pwd}
 }
+
+function macappid () { osascript -e "id of app \"${1}\"" | tr -d '\n' }
