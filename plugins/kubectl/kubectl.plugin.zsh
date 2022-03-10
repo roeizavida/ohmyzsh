@@ -159,9 +159,13 @@ kres(){
     kubectl set env $@ REFRESHED_AT=$(date +%Y%m%d%H%M%S)
 }
 
-# Rollout management.
+# ReplicaSet Management
 alias kgrs='k get rs'
 alias kgrsa='kgrs --all-namespaces'
+alias kdrs='kd rs'
+alias kers='ke rs'
+
+# Rollout management.
 alias krh='kro history'
 alias kru='kro undo'
 alias krrd='kro restart deployment'
@@ -259,6 +263,12 @@ alias kdelapurge='kdel configmap,secret,deployment,statefulset,daemonset,service
 ###############################################
 # Get the plugin dir
 plugin_dir=$(dirname $0)
+
+# Job management.
+alias kgj='kubectl get job'
+alias kej='kubectl edit job'
+alias kdj='kubectl describe job'
+alias kdelj='kubectl delete job'
 
 # Only run if the user actually has kubectl installed
 if (( ${+_comps[kubectl]} )); then
