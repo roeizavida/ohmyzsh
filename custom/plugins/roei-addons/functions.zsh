@@ -55,3 +55,13 @@ function gitconfig () {
 }
 
 function macappid () { osascript -e "id of app \"${1}\"" | tr -d '\n' }
+
+function helm_values () {
+    # Example: helm_values <RELEASE_NAME> <NAMESPACE>
+    if [[ ! -z ${2} ]]
+    then 
+        helm status ${1} -o json -n ${2} | jq .config | yq -P '.'
+    else
+        helm status ${1} -o json | jq .config | yq -P '.'
+    fi
+}
