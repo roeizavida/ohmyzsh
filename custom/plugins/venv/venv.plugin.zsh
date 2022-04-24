@@ -10,7 +10,7 @@ function chpwd() {
   # If ".venv" dir does not exists
   else
     # Check if venv is activated (".venv" in Python path)
-    if [[ $(which python3) == *"/.venv/bin/python" ]]
+    if [[ $(which python3) == *"/.venv/bin/python3" ]]
     then
       # Deactivate venv
       deactivate
