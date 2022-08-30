@@ -32,6 +32,7 @@ alias gotoc='go tool compile'
 alias gotod='go tool dist'
 alias gotofx='go tool fix'
 alias gov='go vet'
+alias gow='go work'
 
 ###############################################
 # Go Path
