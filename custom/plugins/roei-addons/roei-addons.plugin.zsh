@@ -15,7 +15,14 @@ os_name=$(uname)
 DISABLE_UPDATE_PROMPT=true
 
 # History size
-SAVEHIST=999999999
+SAVEHIST=999999999999999999
+###############################################
+
+###############################################
+# Python
+###############################################
+export PYTHON_SITE_USER_BASE="$(python -m site --user-base)/bin"
+export PATH="${PYTHON_SITE_USER_BASE}:$PATH"
 ###############################################
 
 ###############################################
