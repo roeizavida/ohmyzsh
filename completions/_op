@@ -26,7 +26,7 @@ function _op {
       "connect:Manage Connect instances and Connect tokens in your 1Password account"
       "document:Perform CRUD operations on Document items in your vaults"
       "events-api:Manage Events API integrations in your 1Password account"
-      "group:Perform CRUD operations on the groups of users in your 1Password account"
+      "group:Manage the groups in your 1Password account"
       "help:Get help for a command"
       "inject:Inject secrets into a config file"
       "item:Perform CRUD operations on the 1Password items in your vaults"
@@ -852,7 +852,7 @@ function _op_group {
       "edit:Edit a group's name or description"
       "get:Get details about a group"
       "list:List groups"
-      "user:Manage users in groups"
+      "user:Manage group membership"
     )
     _describe "command" commands
     ;;
@@ -976,9 +976,9 @@ function _op_group_user {
   case $state in
   cmnds)
     commands=(
-      "grant:Grant a user access to a group"
+      "grant:Add a user to a group"
       "list:Retrieve users that belong to a group"
-      "revoke:Revoke a user's access to a group"
+      "revoke:Remove a user from a group"
     )
     _describe "command" commands
     ;;
@@ -999,10 +999,10 @@ function _op_group_user {
 
 function _op_group_user_grant {
   _arguments \
-    '--group[Specify the group to grant the user access to.]:' \
+    '--group[Specify the group to add the user to.]:' \
     '(-h --help)'{-h,--help}'[Get help with group user grant.]' \
     '--role[Specify the user'\''s role as a member or manager. Default: member.]:' \
-    '--user[Specify the user to grant group access to.]:' \
+    '--user[Specify the user to add to the group.]:' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
     '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
@@ -1030,9 +1030,9 @@ function _op_group_user_list {
 
 function _op_group_user_revoke {
   _arguments \
-    '--group[Specify the group to revoke the user'\''s access to.]:' \
+    '--group[Specify the group to remove the user from.]:' \
     '(-h --help)'{-h,--help}'[Get help with group user revoke.]' \
-    '--user[Specify the user to revoke group access from.]:' \
+    '--user[Specify the user to remove from the group.]:' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
     '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
@@ -1643,7 +1643,7 @@ function _op_vault {
 
 function _op_vault_create {
   _arguments \
-    '--allow-admins-to-manage[Set whether admins can manage the vault. Default: false.]:' \
+    '--allow-admins-to-manage[Set whether administrators can manage the vault. If not provided, the default policy for the account applies.]:' \
     '--description[Set the group'\''s `description`.]:' \
     '(-h --help)'{-h,--help}'[Get help with vault create.]' \
     '--icon[Set the vault icon.]:' \
