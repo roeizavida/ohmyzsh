@@ -8,3 +8,6 @@ roei/
 # Temporary files
 *.swp
 .DS_Store
+
+# editor configs
+.vscode
