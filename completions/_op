@@ -6,9 +6,9 @@ function _op {
 
   _arguments -C \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '(-h --help)'{-h,--help}'[Get help for op.]' \
@@ -37,6 +37,7 @@ function _op {
       "update:Check for and download updates."
       "user:Manage users within this 1Password account"
       "vault:Manage permissions and perform CRUD operations on your 1Password vaults"
+      "whoami:Get information about a signed-in account"
     )
     _describe "command" commands
     ;;
@@ -91,6 +92,9 @@ function _op {
   vault)
     _op_vault
     ;;
+  whoami)
+    _op_whoami
+    ;;
   esac
 }
 
@@ -101,9 +105,9 @@ function _op_account {
   _arguments -C \
     '(-h --help)'{-h,--help}'[Get help with account.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -149,9 +153,9 @@ function _op_account_add {
     '--shorthand[Set the short account name.]:' \
     '--signin[Directly sign in to the added account.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -164,9 +168,9 @@ function _op_account_forget {
     '--all[Forget all authenticated accounts.]' \
     '(-h --help)'{-h,--help}'[Get help with account forget.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -178,9 +182,9 @@ function _op_account_get {
   _arguments \
     '(-h --help)'{-h,--help}'[Get help with account get.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -192,9 +196,9 @@ function _op_account_list {
   _arguments \
     '(-h --help)'{-h,--help}'[Get help with account list.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -206,9 +210,9 @@ function _op_completion {
   _arguments \
     '(-h --help)'{-h,--help}'[Get help with completion.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -223,9 +227,9 @@ function _op_connect {
   _arguments -C \
     '(-h --help)'{-h,--help}'[Get help with connect.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -269,9 +273,9 @@ function _op_connect_group {
   _arguments -C \
     '(-h --help)'{-h,--help}'[Get help with connect group.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -307,9 +311,9 @@ function _op_connect_group_grant {
     '(-h --help)'{-h,--help}'[Get help with connect group grant.]' \
     '--server[The `server` to grant access to.]:' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -324,9 +328,9 @@ function _op_connect_group_revoke {
     '(-h --help)'{-h,--help}'[Get help with connect group revoke.]' \
     '--server[The `server` to revoke access to.]:' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -341,9 +345,9 @@ function _op_connect_server {
   _arguments -C \
     '(-h --help)'{-h,--help}'[Get help with connect server.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -386,12 +390,13 @@ function _op_connect_server {
 
 function _op_connect_server_create {
   _arguments \
+    '(-f --force)'{-f,--force}'[Do not prompt for confirmation when overwriting credential files.]' \
     '(-h --help)'{-h,--help}'[Get help with connect server create.]' \
     '*--vaults[Grant the Connect server access to these vaults.]:' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -403,9 +408,9 @@ function _op_connect_server_delete {
   _arguments \
     '(-h --help)'{-h,--help}'[Get help with connect server delete.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -418,9 +423,9 @@ function _op_connect_server_edit {
     '(-h --help)'{-h,--help}'[Get help with connect server edit.]' \
     '--name[Change the server'\''s `name`.]:' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -432,9 +437,9 @@ function _op_connect_server_get {
   _arguments \
     '(-h --help)'{-h,--help}'[Get help with connect server get.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -446,9 +451,9 @@ function _op_connect_server_list {
   _arguments \
     '(-h --help)'{-h,--help}'[Get help with connect server list.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -463,9 +468,9 @@ function _op_connect_token {
   _arguments -C \
     '(-h --help)'{-h,--help}'[Get help with connect token.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -509,9 +514,9 @@ function _op_connect_token_create {
     '--server[Issue a token for this server.]:' \
     '*--vault[Issue a token on these vaults.]:' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -524,9 +529,9 @@ function _op_connect_token_delete {
     '(-h --help)'{-h,--help}'[Get help with connect token delete.]' \
     '--server[Only look for tokens for this 1Password Connect server.]:' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -540,9 +545,9 @@ function _op_connect_token_edit {
     '--name[Change the token'\''s name.]:' \
     '--server[Only look for tokens for this 1Password Connect server.]:' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -555,9 +560,9 @@ function _op_connect_token_list {
     '(-h --help)'{-h,--help}'[Get help with connect token list.]' \
     '--server[Only list tokens for this Connect `server`.]:' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -572,9 +577,9 @@ function _op_connect_vault {
   _arguments -C \
     '(-h --help)'{-h,--help}'[Get help with connect vault.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -609,9 +614,9 @@ function _op_connect_vault_grant {
     '--server[The server to be granted access.]:' \
     '--vault[The vault to grant access to.]:' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -625,9 +630,9 @@ function _op_connect_vault_revoke {
     '--server[The `server` to revoke access from.]:' \
     '--vault[The `vault` to revoke a server'\''s access to.]:' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -642,9 +647,9 @@ function _op_document {
   _arguments -C \
     '(-h --help)'{-h,--help}'[Get help with document.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -693,9 +698,9 @@ function _op_document_create {
     '--title[Set the document item'\''s `title`.]:' \
     '--vault[Save the document in this `vault`. Default: Private.]:' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -709,9 +714,9 @@ function _op_document_delete {
     '(-h --help)'{-h,--help}'[Get help with document delete.]' \
     '--vault[Delete the document in this `vault`.]:' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -727,9 +732,9 @@ function _op_document_edit {
     '--title[Set the document item'\''s `title`.]:' \
     '--vault[Look up document in this `vault`.]:' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -739,14 +744,15 @@ function _op_document_edit {
 
 function _op_document_get {
   _arguments \
+    '--force[Force the document to be printed to the shell when printing an unintelligible document to an interactive terminal.]' \
     '(-h --help)'{-h,--help}'[Get help with document get.]' \
     '--include-archive[Include document items in the Archive. Can also be set using OP_INCLUDE_ARCHIVE environment variable.]' \
     '--output[Save the document to the file `path` instead of stdout.]:' \
     '--vault[Look for the document in this `vault`.]:' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -760,9 +766,9 @@ function _op_document_list {
     '--include-archive[Include document items in the Archive. Can also be set using OP_INCLUDE_ARCHIVE environment variable.]' \
     '--vault[Only list documents in this `vault`.]:' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -777,9 +783,9 @@ function _op_events-api {
   _arguments -C \
     '(-h --help)'{-h,--help}'[Get help with events-api.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -810,9 +816,9 @@ function _op_events-api_create {
     '*--features[Set the comma-separated list of `features` the integration token can be used for. Options: '\''signinattempts'\'', '\''itemusages'\''.]:' \
     '(-h --help)'{-h,--help}'[Get help with events-api create.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -827,9 +833,9 @@ function _op_group {
   _arguments -C \
     '(-h --help)'{-h,--help}'[Get help with group.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -879,9 +885,9 @@ function _op_group_create {
     '--description[Set the group'\''s description.]:' \
     '(-h --help)'{-h,--help}'[Get help with group create.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -893,9 +899,9 @@ function _op_group_delete {
   _arguments \
     '(-h --help)'{-h,--help}'[Get help with group delete.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -909,9 +915,9 @@ function _op_group_edit {
     '(-h --help)'{-h,--help}'[Get help with group edit.]' \
     '--name[Change the group'\''s `name`.]:' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -923,9 +929,9 @@ function _op_group_get {
   _arguments \
     '(-h --help)'{-h,--help}'[Get help with group get.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -939,9 +945,9 @@ function _op_group_list {
     '--user[List groups that a `user` belongs to.]:' \
     '--vault[List groups that have direct access to a `vault`.]:' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -956,9 +962,9 @@ function _op_group_user {
   _arguments -C \
     '(-h --help)'{-h,--help}'[Get help with group user.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -972,7 +978,7 @@ function _op_group_user {
     commands=(
       "grant:Grant a user access to a group"
       "list:Retrieve users that belong to a group"
-      "revoke:Revoke a user's access to a vault or group"
+      "revoke:Revoke a user's access to a group"
     )
     _describe "command" commands
     ;;
@@ -998,9 +1004,9 @@ function _op_group_user_grant {
     '--role[Specify the user'\''s role as a member or manager. Default: member.]:' \
     '--user[Specify the user to grant group access to.]:' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -1012,9 +1018,9 @@ function _op_group_user_list {
   _arguments \
     '(-h --help)'{-h,--help}'[Get help with group user list.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -1028,9 +1034,9 @@ function _op_group_user_revoke {
     '(-h --help)'{-h,--help}'[Get help with group user revoke.]' \
     '--user[Specify the user to revoke group access from.]:' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -1041,9 +1047,9 @@ function _op_group_user_revoke {
 function _op_help {
   _arguments \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -1059,9 +1065,9 @@ function _op_inject {
     '(-i --in-file)'{-i,--in-file}'[The filename of a template file to inject.]:' \
     '(-o --out-file)'{-o,--out-file}'[Write the injected template to a file instead of stdout.]:' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -1076,9 +1082,9 @@ function _op_item {
   _arguments -C \
     '(-h --help)'{-h,--help}'[Get help with item.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -1139,9 +1145,9 @@ function _op_item_create {
     '--url[Set the `URL` associated with the item]:' \
     '--vault[Save the item in this `vault`. Default: Private.]:' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -1155,9 +1161,9 @@ function _op_item_delete {
     '(-h --help)'{-h,--help}'[Get help with item delete.]' \
     '--vault[Look for the item in this vault.]:' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -1175,9 +1181,9 @@ function _op_item_edit {
     '--url[Set the `URL` associated with the item]:' \
     '--vault[Save the item in this `vault`.]:' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -1194,9 +1200,9 @@ function _op_item_get {
     '--share-link[Get a shareable link for the item.]' \
     '--vault[Look for the item in this `vault`.]:' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -1207,15 +1213,16 @@ function _op_item_get {
 function _op_item_list {
   _arguments \
     '*--categories[Only list items in these `categories` (comma-separated).]:' \
+    '--favorite[Only list favorite items]' \
     '(-h --help)'{-h,--help}'[Get help with item list.]' \
     '--include-archive[Include items in the Archive. Can also be set using OP_INCLUDE_ARCHIVE environment variable.]' \
     '--long[Output a more detailed item list.]' \
     '*--tags[Only list items with these `tags` (comma-separated).]:' \
     '--vault[Only list items in this `vault`.]:' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -1231,9 +1238,9 @@ function _op_item_share {
     '--vault[Look for the item in this vault.]:' \
     '--view-once[Expire link after a single view.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -1248,9 +1255,9 @@ function _op_item_template {
   _arguments -C \
     '(-h --help)'{-h,--help}'[Get help with item template.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -1285,9 +1292,9 @@ function _op_item_template_get {
     '(-h --help)'{-h,--help}'[Get help with item template get.]' \
     '(-o --out-file)'{-o,--out-file}'[Write the template to a file instead of stdout.]:' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -1299,9 +1306,9 @@ function _op_item_template_list {
   _arguments \
     '(-h --help)'{-h,--help}'[Get help with item template list.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -1317,9 +1324,9 @@ function _op_read {
     '(-n --no-newline)'{-n,--no-newline}'[Do not print a new line after the secret.]' \
     '(-o --out-file)'{-o,--out-file}'[Write the secret to a file instead of stdout.]:' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -1333,9 +1340,9 @@ function _op_run {
     '(-h --help)'{-h,--help}'[Get help with run.]' \
     '--no-masking[Disable masking of secrets on stdout and stderr.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -1349,9 +1356,9 @@ function _op_signin {
     '(-h --help)'{-h,--help}'[Get help with signin.]' \
     '--raw[Only return the session token.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -1365,9 +1372,9 @@ function _op_signout {
     '--forget[Remove the details for a 1Password account from this device.]' \
     '(-h --help)'{-h,--help}'[Get help with signout.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -1380,9 +1387,9 @@ function _op_update {
     '--directory[Download the update to this '\'''\''path'\'''\''.]:' \
     '(-h --help)'{-h,--help}'[Get help with update.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -1397,9 +1404,9 @@ function _op_user {
   _arguments -C \
     '(-h --help)'{-h,--help}'[Get help with user.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -1457,9 +1464,9 @@ function _op_user_confirm {
     '--all[Confirm all unconfirmed users.]' \
     '(-h --help)'{-h,--help}'[Get help with user confirm.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -1471,9 +1478,9 @@ function _op_user_delete {
   _arguments \
     '(-h --help)'{-h,--help}'[Get help with user delete.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -1487,9 +1494,9 @@ function _op_user_edit {
     '--name[Set the user'\''s name.]:' \
     '--travel-mode[Turn Travel Mode on or off for the user.]:' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -1504,9 +1511,9 @@ function _op_user_get {
     '--me[Get the authenticated user'\''s details.]' \
     '--public-key[Get the user'\''s public key.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -1520,9 +1527,9 @@ function _op_user_list {
     '(-h --help)'{-h,--help}'[Get help with user list.]' \
     '--vault[List users who have direct access to `vault`.]:' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -1537,9 +1544,9 @@ function _op_user_provision {
     '--language[Provide the user'\''s account language.]:' \
     '--name[Provide the user'\''s name.]:' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -1551,9 +1558,9 @@ function _op_user_reactivate {
   _arguments \
     '(-h --help)'{-h,--help}'[Get help with user reactivate.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -1566,9 +1573,9 @@ function _op_user_suspend {
     '--deauthorize-devices-after[Deauthorize the user'\''s devices after a time (rounded down to seconds).]:' \
     '(-h --help)'{-h,--help}'[Get help with user suspend.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -1583,9 +1590,9 @@ function _op_vault {
   _arguments -C \
     '(-h --help)'{-h,--help}'[Get help with vault.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -1641,9 +1648,9 @@ function _op_vault_create {
     '(-h --help)'{-h,--help}'[Get help with vault create.]' \
     '--icon[Set the vault icon.]:' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -1655,9 +1662,9 @@ function _op_vault_delete {
   _arguments \
     '(-h --help)'{-h,--help}'[Get help with vault delete.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -1673,9 +1680,9 @@ function _op_vault_edit {
     '--name[Change the vault'\''s `name`.]:' \
     '--travel-mode[Turn Travel Mode on or off for the vault. Only vaults with Travel Mode enabled will be accessible while a user has Travel Mode turned on.]:' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -1687,9 +1694,9 @@ function _op_vault_get {
   _arguments \
     '(-h --help)'{-h,--help}'[Get help with vault get.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -1704,9 +1711,9 @@ function _op_vault_group {
   _arguments -C \
     '(-h --help)'{-h,--help}'[Get help with vault group.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -1747,9 +1754,9 @@ function _op_vault_group_grant {
     '--permissions[The `permissions` to grant to the group.]:' \
     '--vault[The `vault` to grant group permissions to.]:' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -1761,9 +1768,9 @@ function _op_vault_group_list {
   _arguments \
     '(-h --help)'{-h,--help}'[Get help with vault group list.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -1779,9 +1786,9 @@ function _op_vault_group_revoke {
     '--permissions[The `permissions` to revoke from the group.]:' \
     '--vault[The `vault` to revoke access to.]:' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -1795,9 +1802,9 @@ function _op_vault_list {
     '(-h --help)'{-h,--help}'[Get help with vault list.]' \
     '--user[List vaults that a given user has access to.]:' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -1812,9 +1819,9 @@ function _op_vault_user {
   _arguments -C \
     '(-h --help)'{-h,--help}'[Get help with vault user.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -1855,9 +1862,9 @@ function _op_vault_user_grant {
     '--user[The `user` to receive access.]:' \
     '--vault[The `vault` to grant access to.]:' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -1869,9 +1876,9 @@ function _op_vault_user_list {
   _arguments \
     '(-h --help)'{-h,--help}'[Get help with vault user list.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
@@ -1887,9 +1894,23 @@ function _op_vault_user_revoke {
     '--user[The `user` to revoke access from.]:' \
     '--vault[The `vault` to revoke access to.]:' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
-    '--cache[Store and use cached information.]' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
-    '--debug[Output debug logs. Can also be set using $OP_DEBUG environment variable.]' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
+    '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
+    '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
+    '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
+    '--no-color[Print output without color.]' \
+    '--session[Authenticate with this session `token`. 1Password CLI outputs session tokens for successful '\''op signin'\'' commands when biometric unlock is disabled.]:'
+}
+
+function _op_whoami {
+  _arguments \
+    '(-h --help)'{-h,--help}'[Get help with whoami.]' \
+    '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
+    '--config[Use this configuration `directory`.]:' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
     '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
     '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
     '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
