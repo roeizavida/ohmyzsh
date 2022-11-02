@@ -74,6 +74,8 @@ alias kp='kubectl patch'
 alias ks='kubectl scale'
 alias kr='kubectl replace'
 alias kro='kubectl rollout'
+alias koj='kubectl -o json'
+alias koy='kubectl -o yaml'
 
 # Pod management.
 alias kgp='kubectl get pod'
