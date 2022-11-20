@@ -9,5 +9,5 @@ alias sync-conf="python3 $git_configs_path/scripts/config.py sync"
 alias fetch-conf="python3 $git_configs_path/scripts/config.py fetch"
 
 # Load Aliases
-source ~/.oh-my-zsh/roei/aliases.zsh
+source ${ZSH}/roei/aliases.zsh
 ###############################################
