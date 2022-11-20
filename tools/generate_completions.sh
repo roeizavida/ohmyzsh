@@ -1,19 +1,20 @@
-#!/bin/bash
+#!/bin/zsh
 
 # Completions path
-ZSH_COMPLETIONS_PATH=~/.oh-my-zsh/completions
+ZSH_COMPLETIONS_PATH=$ZSH/completions
 
-# Completion commands
-commands=(
+# Completion tools
+tools=(
   "op" # 1Password CLI
   "nerdctl"
+  "kubeshark"
 )
 
 # Download completions
 wget --quiet -O ${ZSH_COMPLETIONS_PATH}/_az https://raw.githubusercontent.com/Azure/azure-cli/dev/az.completion # Azure CLI
 
 # Generate completions
-for command in ${commands[@]}
+for tool in ${tools[@]}
 do
-  $command completion zsh > ${ZSH_COMPLETIONS_PATH}/_${command}
+  $tool completion zsh > ${ZSH_COMPLETIONS_PATH}/_${tool}
 done
