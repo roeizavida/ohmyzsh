@@ -44,3 +44,8 @@ alias tffmt='terraform fmt -recursive -diff'
 alias tfo='terraform output'
 alias tfstate='terraform state'
 alias rmtf='rm -rf .terraform/'
+
+if (( $+commands[terraform] )); then
+  autoload -U +X bashcompinit && bashcompinit
+  complete -o nospace -C terraform terraform
+fi
