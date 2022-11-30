@@ -87,7 +87,7 @@ alias kgpawide='kubectl get pod --all-namespaces -o wide'
 alias kep='kubectl edit pod'
 alias kdp='kubectl describe pod'
 alias kdelp='kubectl delete pod'
-alias kgpi='kubectl get pod --output=custom-columns="NAME:.metadata.name,STATUS:.status.phase,AGE:.status.startTime,IMAGE:.spec.containers[*].image"'
+alias kgpi='kubectl get pod --output=custom-columns="NAMESPACE:.metadata.namespace,NAME:.metadata.name,STATUS:.status.phase,AGE:.status.startTime,IMAGE:.spec.containers[*].image"'
 
 # get pod by label: kgpl "app=myapp" -n myns
 alias kgpl='kubectl get pod -l'
@@ -147,7 +147,7 @@ alias kdd='kubectl describe deployment'
 alias kdeld='kubectl delete deployment'
 alias ksd='kubectl scale deployment'
 alias krsd='kubectl rollout status deployment'
-alias kgdi='kubectl get deployment --output=custom-columns="NAME:.metadata.name,IMAGE:.spec.template.spec.containers[*].image"'
+alias kgdi='kubectl get deployment --output=custom-columns="NAMESPACE:.metadata.namespace,NAME:.metadata.name,IMAGE:.spec.template.spec.containers[*].image"'
 kres(){
     kubectl set env $@ REFRESHED_AT=$(date +%Y%m%d%H%M%S)
 }
@@ -176,7 +176,7 @@ alias kdss='kubectl describe statefulset'
 alias kdelss='kubectl delete statefulset'
 alias ksss='kubectl scale statefulset'
 alias krsss='kubectl rollout status statefulset'
-alias kgssi='kubectl get statefulset --output=custom-columns="NAME:.metadata.name,IMAGE:.spec.template.spec.containers[*].image"'
+alias kgssi='kubectl get statefulset --output=custom-columns="NAMESPACE:.metadata.namespace,NAME:.metadata.name,IMAGE:.spec.template.spec.containers[*].image"'
 
 # Port forwarding
 alias kpf="kubectl port-forward"
