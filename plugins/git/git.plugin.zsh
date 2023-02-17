@@ -104,7 +104,7 @@ compdef _git gccd=git-clone
 
 alias gcl='git clone --recurse-submodules'
 alias gclean='git clean --interactive -d'
-alias gpristine='git reset --hard && git clean --force -dx'
+alias gpristine='git reset --hard && git clean --force -dfx'
 alias gcm='git checkout $(git_main_branch)'
 alias gcd='git checkout $(git_develop_branch)'
 alias gcmsg='git commit --message'
@@ -199,7 +199,9 @@ alias ggpush='git push origin "$(git_current_branch)"'
 
 alias ggsup='git branch --set-upstream-to=origin/$(git_current_branch)'
 alias gpsup='git push --set-upstream origin $(git_current_branch)'
-alias gpsupf='git push --set-upstream origin $(git_current_branch) --force-with-lease'
+is-at-least 2.30 "$git_version" \
+  && alias gpsupf='git push --set-upstream origin $(git_current_branch) --force-with-lease --force-if-includes' \
+  || alias gpsupf='git push --set-upstream origin $(git_current_branch) --force-with-lease'
 
 alias ghh='git help'
 
@@ -236,7 +238,9 @@ alias gma='git merge --abort'
 
 alias gp='git push'
 alias gpd='git push --dry-run'
-alias gpf='git push --force-with-lease'
+is-at-least 2.30 "$git_version" \
+  && alias gpf='git push --force-with-lease --force-if-includes' \
+  || alias gpf='git push --force-with-lease'
 alias gpf!='git push --force'
 alias gpoat='git push origin --all && git push origin --tags'
 alias gpr='git pull --rebase'
