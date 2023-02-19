@@ -1,3 +1,5 @@
+export ZSH_PYENV_QUIET=true
+
 pyenv_config_warning() {
   [[ "$ZSH_PYENV_QUIET" != true ]] || return 0
 
