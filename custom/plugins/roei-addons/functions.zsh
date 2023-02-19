@@ -44,14 +44,18 @@ function docker_env () {
 }
 
 function gitconfig () {
-    pwd=$(pwd)
-    gitconfigparams=$(realpath .gitconfigparams)
-    for repo in $(find . -type f -wholename '*/.git/config' | grep -v -E '/.terraform/|/temp/' | awk -F '/.git/' '{print $1}')
-    do
-        cd ${pwd}/${repo}
-        source ${gitconfigparams}
-    done
-    cd ${pwd}
+    if [[ -f ".gitconfigparams" ]]
+    then
+        pwd=$(pwd)
+        gitconfigparams=$(realpath .gitconfigparams)
+        for repo in $(find . -type f -wholename '*/.git/config' | grep -v -E '/.terraform/|/temp/' | awk -F '/.git/' '{print $1}')
+        do
+            cd ${pwd}/${repo}
+            echo "Configuring Git parameters for repo ${pwd}/${repo}"
+            source ${gitconfigparams}
+        done
+        cd ${pwd}
+    fi
 }
 
 function macappid () { osascript -e "id of app \"${1}\"" | tr -d '\n' }
