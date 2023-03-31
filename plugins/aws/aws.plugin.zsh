@@ -9,7 +9,7 @@ function agr() {
 # AWS profile selection
 function asp() {
   if [[ -z "$1" ]]; then
-    unset AWS_DEFAULT_PROFILE AWS_PROFILE AWS_EB_PROFILE
+    unset AWS_DEFAULT_PROFILE AWS_PROFILE AWS_EB_PROFILE AWS_PROFILE_REGION
     echo AWS profile cleared.
     return
   fi
@@ -25,6 +25,8 @@ function asp() {
   export AWS_DEFAULT_PROFILE=$1
   export AWS_PROFILE=$1
   export AWS_EB_PROFILE=$1
+
+  export AWS_PROFILE_REGION=$(aws configure get region)
 
   if [[ "$2" == "login" ]]; then
     aws sso login
@@ -194,14 +196,21 @@ compctl -K _aws_profiles asp acp aws_change_access_key
 
 # AWS prompt
 function aws_prompt_info() {
-  if [[ -z $AWS_REGION && -z $AWS_PROFILE ]];then return; fi
-  echo "${ZSH_THEME_AWS_PROFILE_PREFIX:=<aws:}${AWS_PROFILE}${ZSH_THEME_AWS_PROFILE_SUFFIX:=>} ${ZSH_THEME_AWS_REGION_PREFIX:=<region:}${AWS_REGION}${ZSH_THEME_AWS_REGION_SUFFIX:=>}"
+  local _aws_to_show
+  local region="${AWS_REGION:-${AWS_DEFAULT_REGION:-$AWS_PROFILE_REGION}}"
+  if [[ -n $AWS_PROFILE ]];then
+    _aws_to_show+="${ZSH_THEME_AWS_PROFILE_PREFIX:=<aws:}${AWS_PROFILE}${ZSH_THEME_AWS_PROFILE_SUFFIX:=>}"
+  fi
+  if [[ -n $AWS_REGION ]]; then
+    [[ -n $AWS_PROFILE ]] && _aws_to_show+=" "
+    _aws_to_show+="${ZSH_THEME_AWS_REGION_PREFIX:=<region:}${region}${ZSH_THEME_AWS_REGION_SUFFIX:=>}"
+  fi
+  echo "$_aws_to_show"
 }
 
 if [[ "$SHOW_AWS_PROMPT" != false && "$RPROMPT" != *'$(aws_prompt_info)'* ]]; then
   RPROMPT='$(aws_prompt_info)'"$RPROMPT"
 fi
-
 
 # Load awscli completions
 
