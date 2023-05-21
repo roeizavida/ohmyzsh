@@ -12,10 +12,17 @@ os_name=$(uname)
 # ZSH
 ###############################################
 # Disable ZSH update prompt
-DISABLE_UPDATE_PROMPT=true
+export DISABLE_UPDATE_PROMPT=true
 
-# History size
-SAVEHIST=999999999999999999
+# History
+export HISTSIZE=1000000000
+export SAVEHIST=$HISTSIZE
+export HISTDIR=~/.zsh/history
+mkdir -p $HISTDIR
+export HISTFILE="${HISTDIR}/$(date +'%Y')"
+setopt INC_APPEND_HISTORY
+setopt HIST_IGNORE_DUPS
+setopt EXTENDED_HISTORY
 ###############################################
 
 ###############################################
