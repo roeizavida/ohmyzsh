@@ -55,3 +55,6 @@ alias vpy='./.venv/bin/python3'
 alias vpip='./.venv/bin/pip3'
 alias vpycreate='python3 -m venv .venv'
 alias vpyactivate='source ./.venv/bin/activate'
+
+# iPython
+alias ipykc='pip install ipykernel && python -m ipykernel install --user --display-name ${PWD} --name ${${PWD##$HOME/}//\//__}'
