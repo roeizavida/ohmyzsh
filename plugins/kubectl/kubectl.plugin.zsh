@@ -255,6 +255,9 @@ alias kej='kubectl edit job'
 alias kdj='kubectl describe job'
 alias kdelj='kubectl delete job'
 
+# Knative management.
+alias kgksi='kubectl get ksvc --output=custom-columns="NAMESPACE:.metadata.namespace,NAME:.metadata.name,READY:.status.conditions[?(@.type==\"Ready\")].status,URL:.status.url,IMAGE:.spec.template.spec.containers[*].image,LATESTCREATED:.status.latestCreatedRevisionName,LATESTREADY:.status.latestReadyRevisionName"'
+
 # Delete all resources (run as "kdela --context <CONTEXT> -n <NAMESPACE> -l <KEY=VALUE>")
 alias kdela='kubectl delete configmap,secret,deployment,statefulset,daemonset,service,ingress,job,cronjob,pod,replicaset'
 alias kdelapurge='kubectl delete configmap,secret,deployment,statefulset,daemonset,service,ingress,job,cronjob,pod,replicaset,persistentvolumeclaim'
