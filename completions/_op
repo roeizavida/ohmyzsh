@@ -30,6 +30,7 @@ function _op {
       "help:Get help for a command"
       "inject:Inject secrets into a config file"
       "item:Perform CRUD operations on the 1Password items in your vaults"
+      "plugin:Manage the shell plugins you use to authenticate third-party CLIs"
       "read:Read a secret using the secrets reference syntax"
       "run:Pass secrets as environment variables to a process"
       "signin:Sign in to a 1Password account"
@@ -70,6 +71,9 @@ function _op {
     ;;
   item)
     _op_item
+    ;;
+  plugin)
+    _op_plugin
     ;;
   read)
     _op_read
@@ -744,10 +748,11 @@ function _op_document_edit {
 
 function _op_document_get {
   _arguments \
-    '--force[Force the document to be printed to the shell when printing an unintelligible document to an interactive terminal.]' \
+    '--file-mode[Set filemode for the output file. It is ignored without the --out-file flag.]:' \
+    '--force[Forcibly print an unintelligible document to an interactive terminal. If --out-file is specified, save the document to a file without prompting for confirmation.]' \
     '(-h --help)'{-h,--help}'[Get help with document get.]' \
     '--include-archive[Include document items in the Archive. Can also be set using OP_INCLUDE_ARCHIVE environment variable.]' \
-    '--output[Save the document to the file `path` instead of stdout.]:' \
+    '(-o --out-file)'{-o,--out-file}'[Save the document to the file `path` instead of stdout.]:' \
     '--vault[Look for the document in this `vault`.]:' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
     '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
@@ -813,7 +818,7 @@ function _op_events-api {
 function _op_events-api_create {
   _arguments \
     '--expires-in[Set how the long the events-api token is valid for in (s)econds, (m)inutes, or (h)ours.]:' \
-    '*--features[Set the comma-separated list of `features` the integration token can be used for. Options: '\''signinattempts'\'', '\''itemusages'\''.]:' \
+    '*--features[Set the comma-separated list of `features` the integration token can be used for. Options: '\''signinattempts'\'', '\''itemusages'\'', '\''auditevents'\''.]:' \
     '(-h --help)'{-h,--help}'[Get help with events-api create.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
     '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
@@ -1059,7 +1064,7 @@ function _op_help {
 
 function _op_inject {
   _arguments \
-    '--file-mode[Set filemode for the output file if it does not yet exist. It is ignored without the --out-file flag.]:' \
+    '--file-mode[Set filemode for the output file. It is ignored without the --out-file flag.]:' \
     '(-f --force)'{-f,--force}'[Do not prompt for confirmation.]' \
     '(-h --help)'{-h,--help}'[Get help with inject.]' \
     '(-i --in-file)'{-i,--in-file}'[The filename of a template file to inject.]:' \
@@ -1179,7 +1184,7 @@ function _op_item_edit {
     '--tags[Set the tags to the specified (comma-separated) values. An empty value will remove all tags.]:' \
     '--title[Set the item'\''s `title`.]:' \
     '--url[Set the `URL` associated with the item]:' \
-    '--vault[Save the item in this `vault`.]:' \
+    '--vault[Edit the item in this `vault`.]:' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
     '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
     '--config[Use this configuration `directory`.]:' \
@@ -1288,6 +1293,7 @@ function _op_item_template {
 
 function _op_item_template_get {
   _arguments \
+    '--file-mode[Set filemode for the output file. It is ignored without the --out-file flag.]:' \
     '(-f --force)'{-f,--force}'[Do not prompt for confirmation.]' \
     '(-h --help)'{-h,--help}'[Get help with item template get.]' \
     '(-o --out-file)'{-o,--out-file}'[Write the template to a file instead of stdout.]:' \
@@ -1316,9 +1322,183 @@ function _op_item_template_list {
     '--session[Authenticate with this session `token`. 1Password CLI outputs session tokens for successful '\''op signin'\'' commands when 1Password app integration is not enabled.]:'
 }
 
+
+function _op_plugin {
+  local -a commands
+
+  _arguments -C \
+    '(-h --help)'{-h,--help}'[Get help with plugin.]' \
+    '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
+    '--config[Use this configuration `directory`.]:' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
+    '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
+    '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
+    '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
+    '--no-color[Print output without color.]' \
+    '--session[Authenticate with this session `token`. 1Password CLI outputs session tokens for successful '\''op signin'\'' commands when 1Password app integration is not enabled.]:' \
+    "1: :->cmnds" \
+    "*::arg:->args"
+
+  case $state in
+  cmnds)
+    commands=(
+      "clear:Clear shell plugin configuration"
+      "credential:Manage credentials for shell plugins"
+      "init:Get started with 1Password Shell Plugins"
+      "inspect:Inspect your existing shell plugin configurations"
+      "list:List all available shell plugins"
+      "run:Provision credentials from 1Password and run this command"
+    )
+    _describe "command" commands
+    ;;
+  esac
+
+  case "$words[1]" in
+  clear)
+    _op_plugin_clear
+    ;;
+  credential)
+    _op_plugin_credential
+    ;;
+  init)
+    _op_plugin_init
+    ;;
+  inspect)
+    _op_plugin_inspect
+    ;;
+  list)
+    _op_plugin_list
+    ;;
+  run)
+    _op_plugin_run
+    ;;
+  esac
+}
+
+function _op_plugin_clear {
+  _arguments \
+    '--all[Clear all configurations for this plugin that apply to this directory and/or terminal session, including the global default.]' \
+    '(-f --force)'{-f,--force}'[Apply immediately without asking for confirmation.]' \
+    '(-h --help)'{-h,--help}'[Get help with plugin clear.]' \
+    '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
+    '--config[Use this configuration `directory`.]:' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
+    '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
+    '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
+    '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
+    '--no-color[Print output without color.]' \
+    '--session[Authenticate with this session `token`. 1Password CLI outputs session tokens for successful '\''op signin'\'' commands when 1Password app integration is not enabled.]:'
+}
+
+
+function _op_plugin_credential {
+  local -a commands
+
+  _arguments -C \
+    '(-h --help)'{-h,--help}'[Get help with plugin credential.]' \
+    '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
+    '--config[Use this configuration `directory`.]:' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
+    '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
+    '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
+    '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
+    '--no-color[Print output without color.]' \
+    '--session[Authenticate with this session `token`. 1Password CLI outputs session tokens for successful '\''op signin'\'' commands when 1Password app integration is not enabled.]:' \
+    "1: :->cmnds" \
+    "*::arg:->args"
+
+  case $state in
+  cmnds)
+    commands=(
+      "import:Import credentials for a shell plugin"
+    )
+    _describe "command" commands
+    ;;
+  esac
+
+  case "$words[1]" in
+  import)
+    _op_plugin_credential_import
+    ;;
+  esac
+}
+
+function _op_plugin_credential_import {
+  _arguments \
+    '(-h --help)'{-h,--help}'[Get help with plugin credential import.]' \
+    '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
+    '--config[Use this configuration `directory`.]:' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
+    '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
+    '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
+    '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
+    '--no-color[Print output without color.]' \
+    '--session[Authenticate with this session `token`. 1Password CLI outputs session tokens for successful '\''op signin'\'' commands when 1Password app integration is not enabled.]:'
+}
+
+function _op_plugin_init {
+  _arguments \
+    '(-h --help)'{-h,--help}'[Get help with plugin init.]' \
+    '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
+    '--config[Use this configuration `directory`.]:' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
+    '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
+    '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
+    '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
+    '--no-color[Print output without color.]' \
+    '--session[Authenticate with this session `token`. 1Password CLI outputs session tokens for successful '\''op signin'\'' commands when 1Password app integration is not enabled.]:'
+}
+
+function _op_plugin_inspect {
+  _arguments \
+    '(-h --help)'{-h,--help}'[Get help with plugin inspect.]' \
+    '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
+    '--config[Use this configuration `directory`.]:' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
+    '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
+    '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
+    '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
+    '--no-color[Print output without color.]' \
+    '--session[Authenticate with this session `token`. 1Password CLI outputs session tokens for successful '\''op signin'\'' commands when 1Password app integration is not enabled.]:'
+}
+
+function _op_plugin_list {
+  _arguments \
+    '(-h --help)'{-h,--help}'[Get help with plugin list.]' \
+    '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
+    '--config[Use this configuration `directory`.]:' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
+    '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
+    '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
+    '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
+    '--no-color[Print output without color.]' \
+    '--session[Authenticate with this session `token`. 1Password CLI outputs session tokens for successful '\''op signin'\'' commands when 1Password app integration is not enabled.]:'
+}
+
+function _op_plugin_run {
+  _arguments \
+    '(-h --help)'{-h,--help}'[Get help with plugin run.]' \
+    '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
+    '--cache[Store and use cached information. Cache is enabled by default. The cache is not available on Windows.]' \
+    '--config[Use this configuration `directory`.]:' \
+    '--debug[Enable debug mode. Can also be enabled by setting the OP_DEBUG environment variable to true.]' \
+    '--encoding[Use this character encoding `type`. Default: UTF-8. Supported: SHIFT_JIS, gbk.]:' \
+    '--format[Use this output format. Can be '\''human-readable'\'' or '\''json'\''. Can be set as the OP_FORMAT environment variable.]:' \
+    '--iso-timestamps[Format timestamps according to ISO 8601 / RFC 3339. Can be set as the OP_ISO_TIMESTAMPS environment variable.]' \
+    '--no-color[Print output without color.]' \
+    '--session[Authenticate with this session `token`. 1Password CLI outputs session tokens for successful '\''op signin'\'' commands when 1Password app integration is not enabled.]:'
+}
+
 function _op_read {
   _arguments \
-    '--file-mode[Set filemode for the output file if it does not yet exist. It is ignored without the --out-file flag.]:' \
+    '--file-mode[Set filemode for the output file. It is ignored without the --out-file flag.]:' \
     '(-f --force)'{-f,--force}'[Do not prompt for confirmation.]' \
     '(-h --help)'{-h,--help}'[Get help with read.]' \
     '(-n --no-newline)'{-n,--no-newline}'[Do not print a new line after the secret.]' \
@@ -1384,6 +1564,7 @@ function _op_signout {
 
 function _op_update {
   _arguments \
+    '--channel[Look for updates from a specific channel. allowed: stable, beta]:' \
     '--directory[Download the update to this '\'''\''path'\'''\''.]:' \
     '(-h --help)'{-h,--help}'[Get help with update.]' \
     '--account[Select the `account` to execute the command by account shorthand, sign-in address, account ID, or user ID. For a list of available accounts, run '\''op account list'\''. Can be set as the OP_ACCOUNT environment variable.]:' \
