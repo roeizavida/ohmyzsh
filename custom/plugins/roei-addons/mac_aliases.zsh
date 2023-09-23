@@ -6,5 +6,5 @@ alias dfh='df -ht apfs'
 ###############################################
 # Load gnu_aliases
 ###############################################
-source "${plugin_dir}/gnu_aliases.zsh"
+# source "${plugin_dir}/gnu_aliases.zsh"
 
