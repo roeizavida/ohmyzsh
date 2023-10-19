@@ -1,0 +1,1 @@
+export PIPX_DEFAULT_PYTHON="$PYENV_ROOT/shims/python"
