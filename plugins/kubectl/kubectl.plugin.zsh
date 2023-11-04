@@ -239,6 +239,7 @@ alias kdelsa="kubectl delete serviceaccount"
 # DaemonSet management.
 alias kgds='kubectl get daemonset'
 alias kgdsw='kubectl get daemonset --watch'
+alias kgdsa='kubectl get daemonset --all-namespaces'
 alias keds='kubectl edit daemonset'
 alias kdds='kubectl describe daemonset'
 alias kdelds='kubectl delete daemonset'
