@@ -2,7 +2,7 @@ dependencies:
   plugins/gitfast:
     repo: felipec/git-completion
     branch: master
-    version: tag:v1.3.7
+    version: tag:v2.0
     postcopy: |
       set -e
       rm -rf git-completion.plugin.zsh Makefile README.adoc t tools
@@ -10,7 +10,7 @@ dependencies:
   plugins/z:
     branch: master
     repo: agkozak/zsh-z
-    version: 6bfe418332866d15373392164df11b4fbec2083f
+    version: afaf2965b41fdc6ca66066e09382726aa0b6aa04
     precopy: |
       set -e
       test -e README.md && mv -f README.md MANUAL.md
