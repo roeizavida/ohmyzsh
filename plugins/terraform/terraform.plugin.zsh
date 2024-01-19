@@ -49,6 +49,8 @@ alias tfuntaint='terraform untaint'
 alias tffmt='terraform fmt -recursive -diff'
 alias tfo='terraform output'
 alias tfstate='terraform state'
+alias tfs='terraform state'
+alias tfsh='terraform show'
 alias rmtf='rm -rf .terraform/'
 
 if (( $+commands[terraform] )); then
