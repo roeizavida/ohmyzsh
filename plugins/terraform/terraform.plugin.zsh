@@ -52,6 +52,11 @@ alias tfstate='terraform state'
 alias tfs='terraform state'
 alias tfsh='terraform show'
 alias rmtf='rm -rf .terraform/'
+alias tfw='terraform workspace'
+alias tfws='terraform workspace select'
+alias tfwl='terraform workspace list'
+alias tfwn='terraform workspace new'
+alias tfwd='terraform workspace delete'
 
 if (( $+commands[terraform] )); then
   autoload -U +X bashcompinit && bashcompinit
