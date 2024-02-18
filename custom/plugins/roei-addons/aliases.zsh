@@ -61,3 +61,4 @@ alias ipykc='pip install ipykernel && python -m ipykernel install --user --displ
 
 # Formatting
 alias numfmth='numfmt --to=iec-i --suffix=B --format="%9.2f"'
+alias numfmtg='LC_NUMERIC=en_US.UTF-8 numfmt --grouping'
