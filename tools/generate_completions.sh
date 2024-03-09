@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/zsh -x
 
 # Completions path
 ZSH_COMPLETIONS_PATH=$ZSH/completions
@@ -8,6 +8,7 @@ tools=(
   "op" # 1Password CLI
   "nerdctl"
   "kubeshark"
+  "kubedog"
 )
 
 # Download completions
