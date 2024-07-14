@@ -18,5 +18,7 @@ wget --quiet -O ${ZSH_COMPLETIONS_PATH}/_az https://raw.githubusercontent.com/Az
 # Generate completions
 for tool in ${tools[@]}
 do
-  $tool completion zsh > ${ZSH_COMPLETIONS_PATH}/_${tool}
+  if [[ -e $commands[$tool] ]]; then
+      $tool completion zsh > ${ZSH_COMPLETIONS_PATH}/_${tool}
+  fi
 done
