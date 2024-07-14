@@ -9,6 +9,7 @@ tools=(
   "nerdctl"
   "kubeshark"
   "kubedog"
+  "tenv"
 )
 
 # Download completions
