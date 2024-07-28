@@ -10,6 +10,7 @@ tools=(
   "kubeshark"
   "kubedog"
   "tenv"
+  "dapr"
 )
 
 # Download completions
