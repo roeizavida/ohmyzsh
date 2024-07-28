@@ -295,3 +295,24 @@ fi
 # cat ~/.oh-my-zsh/plugins/kubectl/kubectl.plugin.zsh | grep -E "^alias kg" | grep -E -v 'output|wide|watch|get_k8s_secret' | sed -e 's/alias kg/alias kjg/g' -e "s/='kubectl/='kj/g" > ~/.oh-my-zsh/plugins/kubectl/kj_aliases.zsh
 # cat ~/.oh-my-zsh/plugins/kubectl/kubectl.plugin.zsh | grep -E "^alias kg" | grep -E -v 'output|wide|watch|get_k8s_secret' | sed -e 's/alias kg/alias kjxg/g' -e "s/='kubectl/='kjx/g" > ~/.oh-my-zsh/plugins/kubectl/kjx_aliases.zsh
 # cat ~/.oh-my-zsh/plugins/kubectl/kubectl.plugin.zsh | grep -E "^alias kg" | grep -E -v 'output|wide|watch|get_k8s_secret' | sed -e 's/alias kg/alias kyg/g' -e "s/='kubectl/='ky/g" > ~/.oh-my-zsh/plugins/kubectl/ky_aliases.zsh
+
+# Utility print functions (json / yaml)
+function _build_kubectl_out_alias {
+  setopt localoptions norcexpandparam
+
+  # alias function
+  eval "function $1 { $2 }"
+
+  # completion function
+  eval "function _$1 {
+    words=(kubectl \"\${words[@]:1}\")
+    _kubectl
+  }"
+
+  compdef _$1 $1
+}
+
+_build_kubectl_out_alias "kj"  'kubectl "$@" -o json | jq'
+_build_kubectl_out_alias "kjx" 'kubectl "$@" -o json | fx'
+_build_kubectl_out_alias "ky"  'kubectl "$@" -o yaml | yh'
+unfunction _build_kubectl_out_alias
