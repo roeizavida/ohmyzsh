@@ -12,3 +12,6 @@ roei/
 # editor configs
 .vscode
 .idea
+
+# zcompile cached files
+*.zwc
