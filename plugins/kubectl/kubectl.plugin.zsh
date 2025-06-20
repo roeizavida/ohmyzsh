@@ -78,6 +78,8 @@ alias kr='kubectl replace'
 alias kro='kubectl rollout'
 alias koj='kubectl -o json'
 alias koy='kubectl -o yaml'
+alias kge='kubectl get events --sort-by=".lastTimestamp"'
+alias kgew='kubectl get events --sort-by=".lastTimestamp" --watch'
 
 # Pod management.
 alias kgp='kubectl get pod'
