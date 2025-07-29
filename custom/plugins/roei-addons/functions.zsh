@@ -59,3 +59,36 @@ function gitconfig () {
 }
 
 function macappid () { osascript -e "id of app \"${1}\"" | tr -d '\n' }
+
+function poetry-init () {
+  # Initialize poetry project
+  poetry init --no-interaction
+  # Move dynamic field under description, then add tool.poetry and dependencies sections
+  sed -i \
+    -e '/^dynamic = \[/d' \
+    -e '/^dependencies = \[/,/^]$/d' \
+    -e '/^description = /a\
+dynamic = ["version", "dependencies"]' \
+    -e '/^version = /d' \
+    -e '/^\[build-system\]$/i\
+[tool.poetry]\
+version = "0.1.0"\
+package-mode = false\
+\
+[tool.poetry.dependencies]\
+' pyproject.toml
+  # Add ruff section
+  cat <<EOF | tee -a pyproject.toml
+
+  [tool.ruff]
+  line-length = 120
+  indent-width = 4
+
+  [tool.ruff.format]
+  quote-style = "double"
+  indent-style = "space"
+
+EOF
+  # Format pyproject.toml
+  taplo fmt pyproject.toml
+}
