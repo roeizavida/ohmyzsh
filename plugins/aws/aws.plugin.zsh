@@ -336,3 +336,5 @@ else
   unset _aws_zsh_completer_path _brew_prefix
 fi
 
+# Disable AWS pager
+export AWS_PAGER=""
