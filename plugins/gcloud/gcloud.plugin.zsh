@@ -50,3 +50,5 @@ if (( ${+CLOUDSDK_HOME} )); then
 
   export CLOUDSDK_HOME
 fi
+
+export CLOUDSDK_PYTHON="${PYENV_ROOT}/shims/python3.13"
