@@ -58,3 +58,9 @@ source "${plugin_dir}/functions.zsh"
 autoload -U +X compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
 ###############################################
+
+###############################################
+# Limits
+###############################################
+ulimit -n 8192
+###############################################
