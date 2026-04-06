@@ -2,11 +2,11 @@
 cache/
 log/
 
-# My ZSH config
-roei/
-
-# Temporary files
+# Vim swap/backup files
 *.swp
+*.swo
+
+# macOS system files
 .DS_Store
 
 # editor configs
@@ -15,3 +15,7 @@ roei/
 
 # zcompile cached files
 *.zwc
+*.zwc.old
+
+# My ZSH config
+roei/
