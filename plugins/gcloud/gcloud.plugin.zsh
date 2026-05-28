@@ -52,3 +52,4 @@ if (( ${+CLOUDSDK_HOME} )); then
 fi
 
 export CLOUDSDK_PYTHON="${PYENV_ROOT}/shims/python3.13"
+export GRPC_DNS_RESOLVER="native"
