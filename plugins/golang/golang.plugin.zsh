@@ -44,3 +44,12 @@ export GOPATH=~/go
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN:/usr/local/go/bin
 ###############################################
+
+## prompt
+function go_prompt_info() {
+  (( $+commands[go] )) || return
+  local go_prompt
+  go_prompt=$(go version | awk '{ print substr($3, 3) }')
+  [[ -z "${go_prompt}" ]] && return
+  echo "${ZSH_THEME_GO_PROMPT_PREFIX}${go_prompt:gs/%/%%}${ZSH_THEME_GO_PROMPT_SUFFIX}"
+}
